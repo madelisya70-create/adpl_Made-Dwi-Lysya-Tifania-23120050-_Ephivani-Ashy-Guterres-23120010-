@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pembayaran - Reservasi Futsal</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #f4f6f9;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .pay-box {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+      }
+
+      .watermark {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.18;
+        font-size: 40px;
+        font-weight: 700;
+        color: #000;
+        pointer-events: none;
+        user-select: none;
+        text-align: center;
+      }
+
+      .btn-main {
+        background: #16a34a;
+        color: white;
+      }
+
+      .btn-main:hover {
+        background: #0f7e39;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Futsal Booking</a>
+      </div>
+    </nav>
+
+    <div class="container mt-5" style="max-width: 600px">
+      <h2 class="text-center text-success fw-bold mb-4">
+        Pembayaran Reservasi
+      </h2>
+
+      <div class="pay-box">
+        <div id="watermark" class="watermark"></div>
+
+        <h5 class="fw-bold mb-3">Detail Booking</h5>
+
+        <p><b>Nama:</b> <span id="nama"></span></p>
+        <p><b>Lapangan:</b> <span id="lapangan"></span></p>
+        <p><b>Tanggal:</b> <span id="tanggal"></span></p>
+        <p><b>Jam:</b> <span id="jam"></span></p>
+        <p><b>ID Transaksi:</b> <span id="trx"></span></p>
+
+        <hr />
+
+        <h5 class="fw-bold mb-3">Upload Bukti Pembayaran</h5>
+
+        <input type="file" class="form-control mb-3" accept="image/*" />
+
+        <button class="btn btn-main w-100" onclick="goToReceipt()">
+          Kirim Pembayaran
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+
+      document.getElementById("nama").textContent = urlParams.get("nama");
+      document.getElementById("lapangan").textContent = urlParams.get("lap");
+      document.getElementById("tanggal").textContent = urlParams.get("tgl");
+      document.getElementById("jam").textContent = urlParams.get("jam");
+
+      const trxID = "TRX-" + Date.now();
+      document.getElementById("trx").textContent = trxID;
+
+      document.getElementById("watermark").textContent = trxID;
+
+      function goToReceipt() {
+        let nama = document.getElementById("nama").textContent;
+        let lap = document.getElementById("lapangan").textContent;
+        let tgl = document.getElementById("tanggal").textContent;
+        let jam = document.getElementById("jam").textContent;
+        let trx = document.getElementById("trx").textContent;
+
+        window.location.href = `cetak_bukti.html?nama=${encodeURIComponent(
+          nama
+        )}&lap=${encodeURIComponent(lap)}&tgl=${encodeURIComponent(
+          tgl
+        )}&jam=${encodeURIComponent(jam)}&trx=${encodeURIComponent(trx)}`;
+      }
+    </script>
+  </body>
+</html>

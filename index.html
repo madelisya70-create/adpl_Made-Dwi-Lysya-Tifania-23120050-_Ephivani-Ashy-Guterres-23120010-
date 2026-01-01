@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda - Reservasi Futsal GEN Z</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <style>
+      body {
+        background: #f4f6f9;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .logo-futsal {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        background: url("img/futsal.jpg") center/cover no-repeat;
+        min-height: 320px;
+        border-radius: 16px;
+        padding: 50px;
+        color: white;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-main {
+        background: #16a34a;
+        color: white;
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-weight: 500;
+      }
+
+      .btn-main:hover {
+        background: #0f7e39;
+      }
+
+      /* CARD */
+      .card {
+        border: none;
+        border-radius: 16px;
+        transition: 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-img-top {
+        height: 180px;
+        object-fit: cover;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+      }
+
+      /* EVENT */
+      .event-icon {
+        font-size: 40px;
+        color: #16a34a;
+        margin-bottom: 10px;
+      }
+
+      .event-card {
+        cursor: pointer;
+      }
+
+      footer {
+        background: #111;
+        color: #ccc;
+        padding: 25px 0;
+        margin-top: 60px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+          <img src="img/logo.jpg" class="logo-futsal" />
+          Futsal Booking
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="jadwal.html">Schedule</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="booking.html">Booking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="container mt-4">
+      <div class="hero">
+        <div class="hero-content">
+          <h1 class="fw-bold">GEN Z Futsal Sport Center</h1>
+          <p class="mb-4">
+            Booking lapangan futsal cepat, modern, dan terpercaya.
+          </p>
+          <a href="#lapangan" class="btn btn-main">
+            <i class="bi bi-dribbble"></i> Pilih Lapangan
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILIH LAPANGAN -->
+    <div class="container mt-5" id="lapangan">
+      <h3 class="fw-bold text-center mb-4 text-success">Pilih Lapangan</h3>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a href="lapangan1.html" class="text-decoration-none text-dark">
+            <div class="card shadow-sm">
+              <img src="img/lap1.jpg" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="fw-bold">Lapangan 1</h5>
+                <p class="text-muted">Sintetis premium standar FIFA</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="lapangan2.html" class="text-decoration-none text-dark">
+            <div class="card shadow-sm">
+              <img src="img/lapangan2.jpg" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="fw-bold">Lapangan 2</h5>
+                <p class="text-muted">Indoor matras anti slip</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="lapangan3.html" class="text-decoration-none text-dark">
+            <div class="card shadow-sm">
+              <img src="img/lapangan3.jpg" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="fw-bold">Lapangan 3</h5>
+                <p class="text-muted">Ukuran besar & lampu stadion</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENT FUTSAL -->
+    <div class="container mt-5">
+      <h3 class="fw-bold text-center text-success mb-4">
+        Event & Turnamen Futsal
+      </h3>
+
+      <div class="row g-4">
+        <!-- TURNAMEN -->
+        <div class="col-md-4 text-center">
+          <a href="event-turnamen.html" class="text-decoration-none text-dark">
+            <div class="card p-4">
+              <i class="bi bi-trophy event-icon"></i>
+              <h5 class="fw-bold">Turnamen Bulanan</h5>
+              <p class="text-muted">
+                Kompetisi futsal antar tim dengan hadiah menarik.
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- SPARING -->
+        <div class="col-md-4 text-center">
+          <a href="event-sparing.html" class="text-decoration-none text-dark">
+            <div class="card p-4">
+              <i class="bi bi-people event-icon"></i>
+              <h5 class="fw-bold">Sparing Partner</h5>
+              <p class="text-muted">
+                Cari lawan tanding dengan level seimbang.
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <!-- LIGA -->
+        <div class="col-md-4 text-center">
+          <a href="event-liga.html" class="text-decoration-none text-dark">
+            <div class="card p-4">
+              <i class="bi bi-lightning-charge event-icon"></i>
+              <h5 class="fw-bold">Liga Komunitas</h5>
+              <p class="text-muted">
+                Liga mingguan untuk semua komunitas futsal.
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <p class="fw-bold mb-2">Ikuti Kami</p>
+        <div class="d-flex justify-content-center gap-3 mb-3">
+          <i class="bi bi-instagram fs-4"></i>
+          <i class="bi bi-facebook fs-4"></i>
+          <i class="bi bi-whatsapp fs-4"></i>
+          <i class="bi bi-tiktok fs-4"></i>
+        </div>
+        <p class="m-0">© 2025 GEN Z Futsal Booking</p>
+      </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function showEvent(type) {
+        const title = document.getElementById("eventTitle");
+        const desc = document.getElementById("eventDesc");
+        const detail = document.getElementById("eventDetail");
+
+        detail.innerHTML = "";
+
+        if (type === "turnamen") {
+          title.innerText = "Turnamen Bulanan";
+          desc.innerText =
+            "Turnamen futsal rutin setiap bulan untuk meningkatkan kompetisi dan sportivitas.";
+
+          addDetail([
+            "Peserta umum & komunitas",
+            "Sistem gugur",
+            "Hadiah menarik",
+            "Wasit resmi",
+            "Lapangan standar nasional",
+          ]);
+        }
+
+        if (type === "sparing") {
+          title.innerText = "Sparing Partner";
+          desc.innerText =
+            "Fitur pencarian lawan tanding yang seimbang sesuai level tim.";
+
+          addDetail([
+            "Matching level otomatis",
+            "Jadwal fleksibel",
+            "Cocok untuk latihan",
+          ]);
+        }
+
+        if (type === "liga") {
+          title.innerText = "Liga Komunitas";
+          desc.innerText =
+            "Liga futsal mingguan untuk komunitas dengan sistem poin dan klasemen.";
+
+          addDetail([
+            "Jadwal rutin",
+            "Sistem poin",
+            "Statistik tim",
+            "Juara liga",
+          ]);
+        }
+      }
+
+      function addDetail(items) {
+        const detail = document.getElementById("eventDetail");
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          detail.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

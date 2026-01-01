@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Futsal Booking</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* ===================== LIGHT MODE (DEFAULT) ===================== */
+      body {
+        font-family: Poppins, sans-serif;
+        background: #f3f4f6;
+        color: #111827;
+      }
+
+      .sidebar {
+        width: 260px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #0d1117;
+        padding-top: 20px;
+        color: white;
+      }
+
+      .sidebar a {
+        color: #c9d1d9;
+        padding: 12px 20px;
+        display: block;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .sidebar a:hover,
+      .sidebar .active {
+        background: #16a34a;
+        color: white;
+      }
+
+      .content {
+        margin-left: 260px;
+        padding: 25px;
+      }
+
+      .stat-box {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      .stat-title {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .stat-value {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      /* ===== PERKECIL UKURAN GRAFIK (TAMBAHAN) ===== */
+      #pendapatanChart {
+        max-height: 260px;
+      }
+
+      /* ===================== DARK MODE (GLOBAL) ===================== */
+      body.dark-mode {
+        background: #020617;
+        color: #e5e7eb;
+      }
+
+      body.dark-mode .sidebar {
+        background: #020617;
+      }
+
+      body.dark-mode .sidebar a {
+        color: #cbd5f5;
+      }
+
+      body.dark-mode .stat-box {
+        background: #111827;
+        color: #e5e7eb;
+        box-shadow: none;
+      }
+
+      body.dark-mode .stat-title {
+        color: #9ca3af;
+      }
+
+      body.dark-mode table {
+        color: #e5e7eb;
+      }
+
+      body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #020617;
+      }
+
+      /* Toggle kecil */
+      .dark-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h3 class="text-center text-success fw-bold mb-4">Admin Panel</h3>
+      <a href="admin.html" class="active">🏠 Dashboard</a>
+      <a href="admin_booking.html">📅 Data Booking</a>
+      <a href="admin_pembayaran.html">💰 Data Pembayaran</a>
+      <a href="admin_user.html">👥 Data User</a>
+      <a href="admin_lapangan.html">⚽ Kelola Lapangan</a>
+      <a href="login_admin.html">🚪 Logout</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+      <!-- HEADER + DARK MODE -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Dashboard Admin</h2>
+
+        <!-- TOGGLE DARK MODE -->
+        <div class="dark-toggle">
+          🌙
+          <div class="form-check form-switch m-0">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="darkModeSwitch"
+              onchange="toggleDarkMode()"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- STATISTIK -->
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="stat-box">
+            <div class="stat-title">Total Booking Hari Ini</div>
+            <div class="stat-value text-success">12</div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <div class="stat-box">
+            <div class="stat-title">Pembayaran Terkonfirmasi</div>
+            <div class="stat-value text-primary">28</div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <div class="stat-box">
+            <div class="stat-title">User Terdaftar</div>
+            <div class="stat-value text-warning">154</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRAFIK -->
+      <div class="mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold">Pendapatan Mingguan</h4>
+          <select
+            class="form-select w-auto"
+            id="bulanSelect"
+            onchange="updateChart()"
+          >
+            <option value="januari">Januari</option>
+            <option value="februari">Februari</option>
+            <option value="maret">Maret</option>
+            <option value="april">April</option>
+          </select>
+        </div>
+
+        <div class="stat-box">
+          <canvas id="pendapatanChart"></canvas>
+        </div>
+      </div>
+
+      <!-- BOOKING TERBARU -->
+      <div class="mt-4">
+        <h4 class="fw-bold mb-3">Booking Terbaru</h4>
+        <div class="stat-box">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Lapangan</th>
+                <th>Tanggal</th>
+                <th>Jam</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Rizky</td>
+                <td>Lapangan 1</td>
+                <td>2025-01-10</td>
+                <td>14:00</td>
+                <td><span class="badge bg-success">Terkonfirmasi</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Ardi</td>
+                <td>Lapangan 2</td>
+                <td>2025-01-10</td>
+                <td>15:00</td>
+                <td>
+                  <span class="badge bg-warning text-dark">Menunggu</span>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Sinta</td>
+                <td>Lapangan 3</td>
+                <td>2025-01-10</td>
+                <td>16:00</td>
+                <td><span class="badge bg-danger">Gagal</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const dataPendapatan = {
+        januari: [3000000, 3500000, 2800000, 4200000],
+        februari: [2500000, 3000000, 2700000, 3900000],
+        maret: [3200000, 3600000, 3000000, 4500000],
+        april: [2800000, 3300000, 2900000, 4100000],
+      };
+
+      const chart = new Chart(document.getElementById("pendapatanChart"), {
+        type: "line",
+        data: {
+          labels: ["Minggu 1", "Minggu 2", "Minggu 3", "Minggu 4"],
+          datasets: [
+            {
+              label: "Pendapatan (Rp)",
+              data: dataPendapatan.januari,
+              borderColor: "#16a34a",
+              backgroundColor: "rgba(22,163,74,0.2)",
+              fill: true,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+        },
+      });
+
+      function updateChart() {
+        chart.data.datasets[0].data = dataPendapatan[bulanSelect.value];
+        chart.update();
+      }
+
+      const body = document.body;
+      const toggle = document.getElementById("darkModeSwitch");
+
+      if (localStorage.getItem("darkMode") === "on") {
+        body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+
+      function toggleDarkMode() {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem(
+          "darkMode",
+          body.classList.contains("dark-mode") ? "on" : "off"
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+body {
+  font-family: Poppins, sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #0d1117;
+  padding-top: 20px;
+}
+
+.sidebar h3 {
+  color: #22c55e;
+}
+
+.sidebar a {
+  color: #c9d1d9;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #16a34a;
+  color: white;
+}
+
+/* CONTENT */
+.content {
+  margin-left: 260px;
+  padding: 25px;
+}
+
+/* BOX */
+.box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body.dark-mode .sidebar {
+  background: #020617;
+}
+
+body.dark-mode .sidebar a {
+  color: #cbd5f5;
+}
+
+body.dark-mode .box {
+  background: #111827;
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
+body.dark-mode table {
+  color: #e5e7eb;
+}
+
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #020617;
+}
+
+/* PERKECIL GRAFIK */
+.chart-box {
+  max-height: 320px;
+}
+
+.chart-box canvas {
+  height: 280px !important;
+}
+
+/* ===== UKURAN GRAFIK LEBIH KECIL ===== */
+#pendapatanChart {
+  max-height: 260px; /* ubah angka ini jika ingin lebih kecil/besar */
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+/* TABLET & HP */
+@media (max-width: 992px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 15px;
+  }
+}
+
+/* HP */
+@media (max-width: 576px) {
+  .stat-box {
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  .sidebar a {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* grafik lebih pendek di HP */
+  #pendapatanChart {
+    max-height: 200px;
+  }
+
+  /* tabel bisa geser */
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

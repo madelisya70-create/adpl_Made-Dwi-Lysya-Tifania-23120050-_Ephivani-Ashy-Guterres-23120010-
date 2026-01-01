@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrasi | Futsal Booking</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #f4f6f9;
+        font-family: Poppins, sans-serif;
+      }
+      .reg-box {
+        background: white;
+        padding: 35px;
+        margin-top: 60px;
+        border-radius: 15px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+      }
+      .btn-main {
+        background: #16a34a;
+        color: white;
+      }
+      .btn-main:hover {
+        background: #0d7a32;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container col-md-5">
+      <div class="reg-box">
+        <h3 class="fw-bold text-center text-success">Buat Akun Baru</h3>
+        <p class="text-center text-muted mb-4">
+          Isi data dengan benar untuk melanjutkan
+        </p>
+
+        <form onsubmit="return cekPassword()">
+          <div class="mb-3">
+            <label class="fw-bold">Username</label>
+            <input type="text" id="username" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold">Email</label>
+            <input type="email" id="email" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold">Nomor Telepon</label>
+            <input type="text" id="telp" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold">Password</label>
+            <input type="password" id="pass1" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-bold">Konfirmasi Password</label>
+            <input type="password" id="pass2" class="form-control" required />
+          </div>
+
+          <button class="btn btn-main w-100">Daftar Sekarang</button>
+
+          <p class="text-center mt-3">
+            Sudah punya akun?
+            <a href="login.html" class="text-success">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function cekPassword() {
+        let p1 = document.getElementById("pass1").value;
+        let p2 = document.getElementById("pass2").value;
+
+        if (p1 !== p2) {
+          alert("Password tidak sama!");
+          return false;
+        }
+
+        alert("Registrasi berhasil!");
+        window.location.href = "login.html";
+        return false;
+      }
+    </script>
+  </body>
+</html>

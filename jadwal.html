@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal Lapangan - Reservasi Futsal</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #f4f6f9;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #16a34a;
+      }
+
+      .schedule-box {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .badge-available {
+        background: #16a34a;
+      }
+
+      .badge-full {
+        background: #dc3545;
+      }
+
+      .btn-book {
+        background: #16a34a;
+        color: white;
+      }
+
+      .btn-book:hover {
+        background: #0f7e39;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Futsal Booking</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="jadwal.html">Schedule</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="booking.html">Booking</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container mt-5">
+      <h2 class="text-center section-title mb-4">
+        Jadwal Ketersediaan Lapangan
+      </h2>
+
+      <!-- FORM PILIH TANGGAL & LAPANGAN -->
+      <div class="schedule-box mb-4">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Pilih Tanggal</label>
+            <input type="date" id="tanggal" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Pilih Lapangan</label>
+            <select id="lapangan" class="form-control">
+              <option value="">-- Pilih Lapangan --</option>
+              <option value="Lapangan 1">Lapangan 1 - Sintetis Premium</option>
+              <option value="Lapangan 2">Lapangan 2 - Matras Indoor</option>
+              <option value="Lapangan 3">Lapangan 3 - Sintetis Lebar</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn-main mt-3 btn-book" onclick="loadJadwal()">
+          Tampilkan Jadwal
+        </button>
+      </div>
+
+      <!-- HASIL JADWAL -->
+      <div id="jadwalResult" class="mt-4"></div>
+    </div>
+
+    <script>
+      function loadJadwal() {
+        let tanggal = document.getElementById("tanggal").value;
+        let lapangan = document.getElementById("lapangan").value;
+
+        if (tanggal === "" || lapangan === "") {
+          alert("Harap pilih tanggal dan lapangan terlebih dahulu!");
+          return;
+        }
+
+        // Daftar jam
+        let jamList = [
+          "08:00 - 09:00",
+          "09:00 - 10:00",
+          "10:00 - 11:00",
+          "11:00 - 12:00",
+          "13:00 - 14:00",
+          "14:00 - 15:00",
+          "15:00 - 16:00",
+          "16:00 - 17:00",
+        ];
+
+        let html = `
+            <div class="schedule-box">
+                <h4 class="fw-bold mb-3">${lapangan} - ${tanggal}</h4>
+
+                <table class="table table-bordered text-center">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Jam</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        // Loop otomatis
+        jamList.forEach((jam, index) => {
+          let status = index === 2 ? "full" : "available";
+
+          html += `
+                <tr>
+                    <td>${jam}</td>
+                    <td>
+                        ${
+                          status === "available"
+                            ? '<span class="badge badge-available px-3 py-2">Tersedia</span>'
+                            : '<span class="badge badge-full px-3 py-2">Penuh</span>'
+                        }
+                    </td>
+                    <td>
+                        ${
+                          status === "available"
+                            ? `<a href="booking.html?lap=${encodeURIComponent(
+                                lapangan
+                              )}&tgl=${encodeURIComponent(
+                                tanggal
+                              )}&jam=${encodeURIComponent(
+                                jam
+                              )}" class="btn btn-book btn-sm">Booking</a>`
+                            : '<button class="btn btn-secondary btn-sm" disabled>Full</button>'
+                        }
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        document.getElementById("jadwalResult").innerHTML = html;
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
